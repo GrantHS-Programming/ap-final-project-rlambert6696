@@ -9,9 +9,10 @@ public class weapon : MonoBehaviour
     public GameObject bulletClone;
     float playerPositionX;
     float playerPositionY;
-    float playerPositionZ;
+    float playerRotationZ;
     public Rigidbody2D rb2D;
-    public BoxCollider2D boxCoide;
+    public BoxCollider2D boxColide;
+    public SpriteRenderer sprender;
     bool isCurrentlyColliding;
     int place = 1;
 
@@ -23,8 +24,14 @@ public class weapon : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {  
+        playerPositionX = player_sprite.transform.position.x;
+        playerPositionY = player_sprite.transform.position.y;
+        playerRotationZ = player_sprite.transform.rotation.z;
+
+        offAndOn();
         move();
+
         if(place == 1){
             if(Input.GetKeyDown(KeyCode.Mouse0)){
                 clone(); 
@@ -32,20 +39,28 @@ public class weapon : MonoBehaviour
         }        
     }
     void clone(){
-        playerPositionX = player_sprite.transform.position.x;
-        playerPositionY = player_sprite.transform.position.y;
-        playerPositionZ = player_sprite.transform.position.z;
-
-        Instantiate(bulletClone, new Vector3(playerPositionX, playerPositionY, playerPositionZ), transform.rotation); 
+        transform.position = new Vector3(playerPositionX,playerPositionY,playerRotationZ);
+        Instantiate(bulletClone, new Vector3(playerPositionX, playerPositionY, playerRotationZ), transform.rotation); 
         place++;
     }
     void move(){
-        transform.position = transform.position + new Vector3(5 * Time.deltaTime, 3 * Time.deltaTime, 0);
-        if(isCurrentlyColliding){
-            Destroy(gameObject);
+        if(place > 1){
+            transform.position = transform.position + new Vector3(5 * Time.deltaTime, 3 * Time.deltaTime, 0);
         }
     }
-    void OnCollisionEnter(Collision col) {
-        isCurrentlyColliding = true;
+    void OnTriggerEnter2D(Collider2D col) {
+        if(place > 1){
+            Destroy(gameObject);
+            Debug.Log("Destroyed");
+        }
+    }
+    void offAndOn() {
+        if(place == 1){
+            sprender = gameObject.GetComponent<SpriteRenderer>();
+            sprender.enabled = false;
+        }
+        else{
+            sprender.enabled = true;
+        }
     }
 }
