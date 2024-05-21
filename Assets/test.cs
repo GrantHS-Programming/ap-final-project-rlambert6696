@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class test : MonoBehaviour
 {
@@ -13,16 +15,17 @@ public class test : MonoBehaviour
     public float xRange = 10;
     public float yRange = 10;
 
-    public float spawnRate = 10;
     public float heightOffset = 10;
 
     float playerPositionX;
     float playerPositionY;
+    public float movementSpeed;
 
     float one;
     float two;
     int placeholder;
-    public int place = 1;
+    
+    int place = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,18 +35,18 @@ public class test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        playerPositionX = player_sprite.transform.position.x;
-        playerPositionY = player_sprite.transform.position.y;
+        //playerPositionX = player_sprite.transform.position.x;
+        //playerPositionY = player_sprite.transform.position.y;
 
         if (place == 1)
         {
-            if (Random.Range(1, 1000) == 1)
+            if (Random.Range(1, 1500) == 1)
             {
-                createClone();
+                //createClone();
             }
         }
 
+        move();
         
     }
 
@@ -92,5 +95,28 @@ public class test : MonoBehaviour
 
         place++;
         
+    }
+    void move()
+    {   
+        float posX = transform.position.x;
+        float posY = transform.position.y;
+        if(place > 1){
+            if(posX < playerPositionX){
+                if(posY < playerPositionY){
+                    transform.position = transform.position + new Vector3(5 * movementSpeed * Time.deltaTime, 5 * movementSpeed * Time.deltaTime, 0);
+                }
+                if(posY > playerPositionY){
+                    transform.position = transform.position + new Vector3(5 * movementSpeed * Time.deltaTime, -5 * movementSpeed * Time.deltaTime, 0);
+                }
+            }
+            if(posX > playerPositionX){
+                if(posY < playerPositionY){
+                    transform.position = transform.position + new Vector3(-5 * movementSpeed * Time.deltaTime, 5 * movementSpeed * Time.deltaTime, 0);
+                }
+                if(posY > playerPositionY){
+                    transform.position = transform.position + new Vector3(-5 * movementSpeed * Time.deltaTime, -5 * movementSpeed * Time.deltaTime, 0);
+                }
+            }
+        }
     }
 }
