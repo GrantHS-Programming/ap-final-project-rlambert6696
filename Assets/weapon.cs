@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,7 +10,8 @@ public class weapon : MonoBehaviour
     public GameObject bulletClone;
     float playerPositionX;
     float playerPositionY;
-    float playerRotationZ;
+    public float playerRotationZ;
+    public float remaining; 
     public Rigidbody2D rb2D;
     public BoxCollider2D boxColide;
     public SpriteRenderer sprender;
@@ -27,16 +29,17 @@ public class weapon : MonoBehaviour
     {  
         playerPositionX = player_sprite.transform.position.x;
         playerPositionY = player_sprite.transform.position.y;
-        playerRotationZ = player_sprite.transform.rotation.z;
-
-        offAndOn();
-        move();
+        playerRotationZ = player_sprite.transform.eulerAngles.z;
+        remaining = 360 - playerRotationZ;
 
         if(place == 1){
             if(Input.GetKeyDown(KeyCode.Mouse0)){
                 clone(); 
             }
-        }        
+        }
+
+        offAndOn();
+        move();     
     }
     void clone(){
         transform.position = new Vector3(playerPositionX,playerPositionY,playerRotationZ);
@@ -45,7 +48,9 @@ public class weapon : MonoBehaviour
     }
     void move(){
         if(place > 1){
-            transform.position = transform.position + new Vector3(5 * Time.deltaTime, 3 * Time.deltaTime, 0);
+            //if(playerRotationZ > 0 && playerRotationZ < 90){
+                transform.position = transform.position + new Vector3( Input.mousePosition.x * Time.deltaTime, Input.mousePosition.y * Time.deltaTime, 0);
+            //}
         }
     }
     void OnTriggerEnter2D(Collider2D col) {
