@@ -18,6 +18,8 @@ public class weapon : MonoBehaviour
     bool isCurrentlyColliding;
     int place = 1;
 
+    float finalRotation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +31,8 @@ public class weapon : MonoBehaviour
     {  
         playerPositionX = player_sprite.transform.position.x;
         playerPositionY = player_sprite.transform.position.y;
+
         playerRotationZ = player_sprite.transform.eulerAngles.z;
-        remaining = 360 - playerRotationZ;
 
         if(place == 1){
             if(Input.GetKeyDown(KeyCode.Mouse0)){
@@ -43,14 +45,38 @@ public class weapon : MonoBehaviour
     }
     void clone(){
         transform.position = new Vector3(playerPositionX,playerPositionY,playerRotationZ);
-        Instantiate(bulletClone, new Vector3(playerPositionX, playerPositionY, playerRotationZ), transform.rotation); 
+        Instantiate(bulletClone, new Vector3(playerPositionX, playerPositionY, playerRotationZ), transform.rotation);
+        if(place == 1){
+        finalRotation = player_sprite.transform.eulerAngles.z;
+        }
         place++;
     }
     void move(){
-        if(place > 1){
-            //if(playerRotationZ > 0 && playerRotationZ < 90){
-                transform.position = transform.position + new Vector3( Input.mousePosition.x * Time.deltaTime, Input.mousePosition.y * Time.deltaTime, 0);
-            //}
+        if(place == 2){
+            if(finalRotation < 22.5 || finalRotation > 337.5){
+                transform.position = transform.position + new Vector3( 0 * Time.deltaTime, 10 * Time.deltaTime, 0);
+            }
+            if(finalRotation > 22.5 && finalRotation < 67.5){
+                transform.position = transform.position + new Vector3(-10 * Time.deltaTime, 10 * Time.deltaTime, 0);
+            }
+            if(finalRotation > 67.5 && finalRotation < 112.5){
+                transform.position = transform.position + new Vector3(-10 * Time.deltaTime, 0 * Time.deltaTime, 0);
+            }
+            if(finalRotation > 112.5 && finalRotation < 157.5){
+                transform.position = transform.position + new Vector3(-10 * Time.deltaTime, -10 * Time.deltaTime, 0);
+            }
+            if(finalRotation > 157.5 && finalRotation < 202.5){
+                transform.position = transform.position + new Vector3( 0 * Time.deltaTime, -10 * Time.deltaTime, 0);
+            }
+            if(finalRotation > 202.5 && finalRotation < 247.5){
+                transform.position = transform.position + new Vector3( 10 * Time.deltaTime, -10 * Time.deltaTime, 0);
+            }
+            if(finalRotation > 247.5 && finalRotation < 292.5){
+                transform.position = transform.position + new Vector3( 10 * Time.deltaTime, 0 * Time.deltaTime, 0);
+            }
+            if(finalRotation > 292.5 && finalRotation < 337.5){
+                transform.position = transform.position + new Vector3( 10 * Time.deltaTime, 10 * Time.deltaTime, 0);
+            }
         }
     }
     void OnTriggerEnter2D(Collider2D col) {

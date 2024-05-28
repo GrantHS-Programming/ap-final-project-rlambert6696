@@ -8,10 +8,6 @@ public class playerMove : MonoBehaviour
     public Rigidbody2D rb2d;
     public Vector2 moveInput;
 
-    Vector3 cameraPos;
-    CapsuleCollider2D mainCollider;
-    Transform t;
-
 
     // Start is called before the first frame update
     void Start()

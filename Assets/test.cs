@@ -35,14 +35,14 @@ public class test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //playerPositionX = player_sprite.transform.position.x;
-        //playerPositionY = player_sprite.transform.position.y;
+        playerPositionX = player_sprite.transform.position.x;
+        playerPositionY = player_sprite.transform.position.y;
 
         if (place == 1)
         {
             if (Random.Range(1, 1500) == 1)
             {
-                //createClone();
+                createClone();
             }
         }
 
