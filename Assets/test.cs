@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 public class test : MonoBehaviour
 {
     public GameObject clone;
-
     public GameObject player_sprite;
 
     Vector2 randomPosition;
@@ -57,7 +56,6 @@ public class test : MonoBehaviour
         float highestPoint = transform.position.y + heightOffset;
 
         Instantiate(clone, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 1), transform.rotation);
-
 
         transform.Rotate(Vector3.right * Time.deltaTime);
 
@@ -121,9 +119,9 @@ public class test : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Bullet"){
+        if(collision.gameObject.name == "Bullet" ){
+            Debug.Log("bullet");
             Destroy(clone);
-            Debug.Log("hit");
         }
     }
 }

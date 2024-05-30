@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -17,7 +18,7 @@ public class weapon : MonoBehaviour
     public SpriteRenderer sprender;
     bool isCurrentlyColliding;
     int place = 1;
-
+    public float targetTime;
     float finalRotation;
 
     // Start is called before the first frame update
@@ -41,46 +42,58 @@ public class weapon : MonoBehaviour
         }
 
         offAndOn();
-        move();     
+        move();
+
+        if(targetTime <= 0.0f){
+            if(place > 1){
+                Destroy(gameObject);
+                Debug.Log("time up");
+            }
+        }
     }
     void clone(){
+        targetTime = 5f;
         transform.position = new Vector3(playerPositionX,playerPositionY,playerRotationZ);
-        Instantiate(bulletClone, new Vector3(playerPositionX, playerPositionY, playerRotationZ), transform.rotation);
+        bulletClone = Instantiate(bulletClone, new Vector3(playerPositionX, playerPositionY, playerRotationZ), transform.rotation);
+        bulletClone.name = "Bullet";
         if(place == 1){
         finalRotation = player_sprite.transform.eulerAngles.z;
         }
         place++;
     }
     void move(){
+        targetTime -= Time.deltaTime;
+
         if(place == 2){
             if(finalRotation < 22.5 || finalRotation > 337.5){
-                transform.position = transform.position + new Vector3( 0 * Time.deltaTime, 10 * Time.deltaTime, 0);
+                transform.position = transform.position + new Vector3( 0 * Time.deltaTime, 13 * Time.deltaTime, 0);
             }
-            if(finalRotation > 22.5 && finalRotation < 67.5){
-                transform.position = transform.position + new Vector3(-10 * Time.deltaTime, 10 * Time.deltaTime, 0);
+            if(finalRotation >= 22.5 && finalRotation < 67.5){
+                transform.position = transform.position + new Vector3(-13 * Time.deltaTime, 13 * Time.deltaTime, 0);
             }
-            if(finalRotation > 67.5 && finalRotation < 112.5){
-                transform.position = transform.position + new Vector3(-10 * Time.deltaTime, 0 * Time.deltaTime, 0);
+            if(finalRotation >= 67.5 && finalRotation < 112.5){
+                transform.position = transform.position + new Vector3(-13 * Time.deltaTime, 0 * Time.deltaTime, 0);
             }
-            if(finalRotation > 112.5 && finalRotation < 157.5){
-                transform.position = transform.position + new Vector3(-10 * Time.deltaTime, -10 * Time.deltaTime, 0);
+            if(finalRotation >= 112.5 && finalRotation < 157.5){
+                transform.position = transform.position + new Vector3(-13 * Time.deltaTime, -13 * Time.deltaTime, 0);
             }
-            if(finalRotation > 157.5 && finalRotation < 202.5){
-                transform.position = transform.position + new Vector3( 0 * Time.deltaTime, -10 * Time.deltaTime, 0);
+            if(finalRotation >= 157.5 && finalRotation < 202.5){
+                transform.position = transform.position + new Vector3( 0 * Time.deltaTime, -13 * Time.deltaTime, 0);
             }
-            if(finalRotation > 202.5 && finalRotation < 247.5){
-                transform.position = transform.position + new Vector3( 10 * Time.deltaTime, -10 * Time.deltaTime, 0);
+            if(finalRotation >= 202.5 && finalRotation < 247.5){
+                transform.position = transform.position + new Vector3( 13 * Time.deltaTime, -13 * Time.deltaTime, 0);
             }
-            if(finalRotation > 247.5 && finalRotation < 292.5){
-                transform.position = transform.position + new Vector3( 10 * Time.deltaTime, 0 * Time.deltaTime, 0);
+            if(finalRotation >= 247.5 && finalRotation < 292.5){
+                transform.position = transform.position + new Vector3( 13 * Time.deltaTime, 0 * Time.deltaTime, 0);
             }
-            if(finalRotation > 292.5 && finalRotation < 337.5){
-                transform.position = transform.position + new Vector3( 10 * Time.deltaTime, 10 * Time.deltaTime, 0);
+            if(finalRotation >= 292.5 && finalRotation < 337.5){
+                transform.position = transform.position + new Vector3( 13 * Time.deltaTime, 13 * Time.deltaTime, 0);
             }
         }
     }
     void OnTriggerEnter2D(Collider2D col) {
         if(place > 1){
+            Thread.Sleep(10);
             Destroy(gameObject);
         }
     }

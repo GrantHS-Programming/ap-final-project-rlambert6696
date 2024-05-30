@@ -986,7 +986,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!212 &277976564
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1119,7 +1119,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!212 &382267767
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2115,7 +2115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d9a49fee273794b9c93c1d2dd0c9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 10
   rb2d: {fileID: 692093192}
   moveInput: {x: 0, y: 0}
 --- !u!58 &692093191
@@ -4232,7 +4232,7 @@ GameObject:
   - component: {fileID: 1610833790}
   m_Layer: 8
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4370,6 +4370,7 @@ MonoBehaviour:
   rb2D: {fileID: 1610833786}
   boxColide: {fileID: 1610833785}
   sprender: {fileID: 1610833788}
+  targetTime: 0
 --- !u!1 &1731640978
 GameObject:
   m_ObjectHideFlags: 0
@@ -5050,7 +5051,7 @@ GameObject:
   - component: {fileID: 1940420739}
   m_Layer: 7
   m_Name: EvilDude
-  m_TagString: Original
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
