@@ -119,4 +119,11 @@ public class test : MonoBehaviour
             }
         }
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Bullet"){
+            Destroy(clone);
+            Debug.Log("hit");
+        }
+    }
 }

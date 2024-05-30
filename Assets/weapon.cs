@@ -82,7 +82,6 @@ public class weapon : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if(place > 1){
             Destroy(gameObject);
-            Debug.Log("Destroyed");
         }
     }
     void offAndOn() {
