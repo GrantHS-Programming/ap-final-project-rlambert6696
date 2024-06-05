@@ -12,9 +12,6 @@ public class weapon : MonoBehaviour
     float playerPositionX;
     float playerPositionY;
     public float playerRotationZ;
-    public float remaining; 
-    public Rigidbody2D rb2D;
-    public BoxCollider2D boxColide;
     public SpriteRenderer sprender;
     bool isCurrentlyColliding;
     int place = 1;
@@ -93,8 +90,12 @@ public class weapon : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col) {
         if(place > 1){
-            Thread.Sleep(10);
-            Destroy(gameObject);
+            if(col.gameObject.tag != "Player"){
+                if(col.gameObject.tag == "Fake"){
+                    FindObjectOfType<test>().KillSprite(col.gameObject.name);
+                }
+                Destroy(gameObject);
+            }
         }
     }
     void offAndOn() {

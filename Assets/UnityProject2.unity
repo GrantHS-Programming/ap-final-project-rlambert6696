@@ -4366,9 +4366,6 @@ MonoBehaviour:
   player_sprite: {fileID: 692093189}
   bulletClone: {fileID: 1610833783}
   playerRotationZ: 0
-  remaining: 0
-  rb2D: {fileID: 1610833786}
-  boxColide: {fileID: 1610833785}
   sprender: {fileID: 1610833788}
   targetTime: 0
 --- !u!1 &1731640978
@@ -5174,6 +5171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clone: {fileID: 1940420733}
   player_sprite: {fileID: 692093189}
+  bullet: {fileID: 1610833783}
   xRange: 10
   yRange: 10
   heightOffset: 10
