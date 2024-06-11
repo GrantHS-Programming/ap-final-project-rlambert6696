@@ -5,9 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Original
-  - Enemy
-  - Bullet
+  - player
+  - bullet
   - Fake
+  - walls & enemy
   layers:
   - Default
   - TransparentFX

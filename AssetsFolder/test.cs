@@ -41,7 +41,7 @@ public class test : MonoBehaviour
             if (Random.Range(1, 1500) == 1)
             {
 
-                createClone(num);
+                //createClone(num);
                 num++;
             }
         }
@@ -56,7 +56,6 @@ public class test : MonoBehaviour
         float lowestPoint = transform.position.y - heightOffset;
         float highestPoint = transform.position.y + heightOffset;
 
-        clone.tag = "Fake";
         clone = Instantiate(clone, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 1), transform.rotation);
 
         transform.Rotate(Vector3.right * Time.deltaTime);
@@ -94,6 +93,9 @@ public class test : MonoBehaviour
         transform.position = randomPosition;
 
         clone.name = "clone " + num;
+
+        clone.tag = "Fake";
+        
     }
     void move()
     {   
@@ -118,13 +120,12 @@ public class test : MonoBehaviour
             }
         }
     }
-    void OnCollisionEnter2D(Collision2D collision) 
-    { 
-        if (collision.gameObject.tag == "bullet") 
-        { 
+
+    void OnCollisionEnter2D(Collision2D collision){
+        if(collision.gameObject.tag == "Bullet"){
             if(tag == "Fake"){
                 Destroy(gameObject);
-            } 
-        } 
-    } 
+            }
+        }
+    }
 }

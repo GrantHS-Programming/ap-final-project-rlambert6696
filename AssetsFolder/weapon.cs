@@ -53,7 +53,6 @@ public class weapon : MonoBehaviour
         transform.position = new Vector3(playerPositionX,playerPositionY,playerRotationZ);
         bulletClone = Instantiate(bulletClone, new Vector3(playerPositionX, playerPositionY, playerRotationZ), transform.rotation);
         bulletClone.name = "Bullet";
-        bulletClone.tag = "bullet";
         if(place == 1){
         finalRotation = player_sprite.transform.eulerAngles.z;
         }
@@ -89,24 +88,20 @@ public class weapon : MonoBehaviour
             }
         }
     }
-
-    void OnCollisionEnter2D(Collision2D col) 
+    void OnCollisionEnter2D(UnityEngine.Collision2D collision)
     {
         if(place > 1){
-            if(col.gameObject.tag != "player"){
-                Debug.Log("destroyed");
+            if(collision.gameObject.tag != "Player"){
                 Destroy(gameObject);
             }
         }
     }
-
     void offAndOn() {
         if(place == 1){
             sprender = gameObject.GetComponent<SpriteRenderer>();
             sprender.enabled = false;
         }
         else{
-            sprender = gameObject.GetComponent<SpriteRenderer>();
             sprender.enabled = true;
         }
     }
