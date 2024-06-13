@@ -22,7 +22,6 @@ public class test : MonoBehaviour
     float one;
     float two;
     int placeholder;
-    int kills;
     int num = 0;
     // Start is called before the first frame update
     void Start()
@@ -56,8 +55,8 @@ public class test : MonoBehaviour
         float lowestPoint = transform.position.y - heightOffset;
         float highestPoint = transform.position.y + heightOffset;
 
-        clone.tag = "Fake";
         clone = Instantiate(clone, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 1), transform.rotation);
+        clone.tag = "Fake";
 
         transform.Rotate(Vector3.right * Time.deltaTime);
 

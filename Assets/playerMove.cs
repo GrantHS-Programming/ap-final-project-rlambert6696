@@ -7,6 +7,8 @@ public class playerMove : MonoBehaviour
     public float moveSpeed = 20;
     public Rigidbody2D rb2d;
     public Vector2 moveInput;
+    public GameObject Health;
+    
 
 
     // Start is called before the first frame update
@@ -28,5 +30,10 @@ public class playerMove : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
 
+    }
+    void OnCollisionEnter2D(Collision2D collision){
+        if(collision.gameObject.tag == "Fake"){
+            Health.GetComponent<healthTracker>().healthDown();
+        }
     }
 }
